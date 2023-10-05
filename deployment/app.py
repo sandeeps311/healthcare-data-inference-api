@@ -449,9 +449,10 @@ def predict():
         # print(path_in)
         df,provider_id=final_pipeline(temp_bene,temp_inp,temp_out)
         print(df)
-        vertical_concat = [provider_id, df]
-        print(vertical_concat)
+        result_df = pd.concat([df, provider_id], axis=1)
+        print(result_df)
         count=0
+        result_df.to_csv('test.csv')
         # if int(df['Prediction'])==1:
         #     string='Provider_ID :='+str(str(provider_id))+'  is FRAUD'
         #
@@ -459,7 +460,7 @@ def predict():
         #     string='Provider_ID :='+str(str(provider_id))+'  is NOT FRAUD'
 
 
-        return str(vertical_concat)
+        return result_df[['Prediction','Provider']].head().to_dict(orient='records')
 
         
 
