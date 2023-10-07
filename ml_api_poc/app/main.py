@@ -27,7 +27,7 @@ async def predict(beneficiary: UploadFile, inpatient: UploadFile, outpatient: Up
         inpatient_df = pd.read_csv(io.BytesIO(inpatient_contents))
         outpatient_df = pd.read_csv(io.BytesIO(outpatient_contents))
 
-        df, provider_id = utils.final_pipeline(beneficiary_df, inpatient_df, outpatient_df)
+        df, provider_id = utils.preporcessing(beneficiary_df, inpatient_df, outpatient_df)
         result_df = pd.concat([df, provider_id], axis=1)
 
         return result_df[['Prediction', 'Provider']].head(100).to_dict(orient='records')
