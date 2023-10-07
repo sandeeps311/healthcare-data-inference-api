@@ -30,5 +30,5 @@ async def predict(beneficiary: UploadFile, inpatient: UploadFile, outpatient: Up
         df, provider_id = utils.preporcessing(beneficiary_df, inpatient_df, outpatient_df)
         result_df = pd.concat([df, provider_id], axis=1)
 
-        return result_df[['Prediction', 'Provider']].head(100).to_dict(orient='records')
+        return result_df[['Prediction', 'Provider']].to_dict(orient='records')
         # return result_df[['Prediction', 'Provider']].to_dict(orient='records')

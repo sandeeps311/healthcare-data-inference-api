@@ -1,16 +1,11 @@
 import pickle
-
 import joblib
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import normalize
-import io
-import pickle
-import joblib
-from fastapi import FastAPI, UploadFile, HTTPException
-from pydantic import BaseModel
-from sklearn.preprocessing import normalize, StandardScaler
-import  multipart
+
+
+# import  multipart
 
 
 def final_pipeline(train_beneficiary, train_inpatient, train_outpatient):
@@ -920,8 +915,8 @@ def preporcessing(Test_Beneficiarydata, Test_Inpatientdata, Test_Outpatientdata)
     print('model_loaded')
 
     # X_train['RenalDiseaseIndicator'] = X_train['RenalDiseaseIndicator'].astype(str).astype(int)
-    filename = r'app/models/best_rf_model_pkl.sav'
-    scaler= r'app/models/scaler.pkl'
+    filename = 'app/models/best_rf_model_pkl.sav'
+    scaler= 'app/models/scaler.pkl'
 
     loaded_model = pickle.load(open(filename, 'rb'))
 
