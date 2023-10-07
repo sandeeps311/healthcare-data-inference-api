@@ -20,4 +20,4 @@ scipy
 six
 threadpoolctl
 Werkzeug
-
+python-multipart
