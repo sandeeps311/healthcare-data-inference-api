@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile
 import io
 import pandas as pd
-from src.utils import utils
+from app.utils import utils
 
 app = FastAPI()
 

@@ -6,7 +6,7 @@
 !requirements.txt
 !Dockerfile
 # !host.json
-
+!ml_api_poc
 # but ignore
 **/__pycache__
 **/.hypothesis
