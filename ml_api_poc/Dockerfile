@@ -12,7 +12,7 @@ RUN pip install -r /code/requirements.txt
 # RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 #
-COPY . /code/app
+COPY ./app /code/app
 
 #
 CMD ["hypercorn", "app.main:app", "--bind", "0.0.0.0:8080"]
