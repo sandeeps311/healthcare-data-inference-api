@@ -351,11 +351,10 @@ def final_pipeline(train_beneficiary, train_inpatient, train_outpatient):
         remove_col.append('ClmProcedureCode_' + str(i))
 
     X_train = X_train.drop(columns=remove_col, axis=1)
-
     print(X_train.shape)
 
     print('normalization started')
-    # normalazition of continous data
+    # normalization of continuous data
     Cont_col = ['InscClaimAmtReimbursed', 'DeductibleAmtPaid', 'Admitted_days', 'Claim_time',
                 'Amount_get', 'IPAnnualReimbursementAmt', 'IPAnnualDeductibleAmt', 'OPAnnualReimbursementAmt',
                 'OPAnnualDeductibleAmt', 'Age', 'Tolat_chronic_cond', 'Total_ip_op_amount_reimb',
