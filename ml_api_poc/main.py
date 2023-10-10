@@ -1,6 +1,9 @@
-from fastapi import FastAPI, UploadFile
 import io
+import pickle
+
 import pandas as pd
+from fastapi import FastAPI, UploadFile
+
 # from app.utils import utils
 
 app = FastAPI()
