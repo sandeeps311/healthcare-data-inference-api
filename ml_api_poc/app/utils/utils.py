@@ -392,6 +392,21 @@ def preporcessing(Test_Beneficiarydata, Test_Inpatientdata, Test_Outpatientdata)
     # Test_Beneficiarydata.head(200).to_csv('Test_Beneficiarydata.csv')
     # Test_Inpatientdata.head(300).to_csv('Test_Inpatientdata.csv')
     # Test_Outpatientdata.head(300).to_csv('Test_Outpatientdata.csv')
+    ##Replacing 2 with 0 for chronic conditions ,that means chroniv condition No is 0 and yes is 1
+
+    # Train_Beneficiarydata = Train_Beneficiarydata.replace({'ChronicCond_Alzheimer': 2, 'ChronicCond_Heartfailure': 2, 'ChronicCond_KidneyDisease': 2,
+    #                            'ChronicCond_Cancer': 2, 'ChronicCond_ObstrPulmonary': 2, 'ChronicCond_Depression': 2,
+    #                            'ChronicCond_Diabetes': 2, 'ChronicCond_IschemicHeart': 2, 'ChronicCond_Osteoporasis': 2,
+    #                            'ChronicCond_rheumatoidarthritis': 2, 'ChronicCond_stroke': 2 }, 0)
+
+    # Train_Beneficiarydata = Train_Beneficiarydata.replace({'RenalDiseaseIndicator': 'Y'}, 1)
+
+    Test_Beneficiarydata = Test_Beneficiarydata.replace({'ChronicCond_Alzheimer': 2, 'ChronicCond_Heartfailure': 2, 'ChronicCond_KidneyDisease': 2,
+                            'ChronicCond_Cancer': 2, 'ChronicCond_ObstrPulmonary': 2, 'ChronicCond_Depression': 2,
+                            'ChronicCond_Diabetes': 2, 'ChronicCond_IschemicHeart': 2, 'ChronicCond_Osteoporasis': 2,
+                            'ChronicCond_rheumatoidarthritis': 2, 'ChronicCond_stroke': 2 }, 0)
+
+    Test_Beneficiarydata = Test_Beneficiarydata.replace({'RenalDiseaseIndicator': 'Y'}, 1)
 
     Test_Beneficiarydata['DOB'] = pd.to_datetime(Test_Beneficiarydata['DOB'], format='%Y-%m-%d')
     Test_Beneficiarydata['DOD'] = pd.to_datetime(Test_Beneficiarydata['DOD'], format='%Y-%m-%d', errors='ignore')
@@ -874,6 +889,8 @@ def preporcessing(Test_Beneficiarydata, Test_Inpatientdata, Test_Outpatientdata)
 
     # **Data Aggregation to the Providers level**
 
+    Test_category_removed[['RenalDiseaseIndicator','Gender_2' ,'Race_2','Race_3','Race_5' ]]=Test_category_removed[['RenalDiseaseIndicator','Gender_2' ,'Race_2','Race_3','Race_5' ]].astype('int')
+
     # In[40]:
 
     ### Lets aggregate claims data to unique providers.
@@ -921,7 +938,7 @@ def preporcessing(Test_Beneficiarydata, Test_Inpatientdata, Test_Outpatientdata)
     loaded_model = pickle.load(open(filename, 'rb'))
 
     X_scaled_unseen = pickle.load(open(scaler, 'rb'))
-    Test_category_removed_groupedbyProv_PF['RenalDiseaseIndicator']=0
+    # Test_category_removed_groupedbyProv_PF['RenalDiseaseIndicator']=0
     unseen= X_scaled_unseen.transform(Test_category_removed_groupedbyProv_PF.iloc[:, 1:])
     X_teststd = loaded_model.predict(unseen)
 
@@ -932,6 +949,7 @@ def preporcessing(Test_Beneficiarydata, Test_Inpatientdata, Test_Outpatientdata)
     # prediction_tr = predict_with_best_t(y_predict_tr, 0.382)
 
     pred_df = pd.DataFrame(X_teststd, columns=['Prediction'])
+
 
     return pred_df, provider_id
 
