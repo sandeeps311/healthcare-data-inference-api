@@ -1,0 +1,12 @@
+# ignore everything
+*
+# except
+!/src
+!/models
+!requirements.txt
+!Dockerfile
+# !host.json
+
+# but ignore
+**/__pycache__
+**/.hypothesis
